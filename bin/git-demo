@@ -1,0 +1,19 @@
+#!/bin/sh
+
+git checkout master --quiet
+
+git log --pretty=oneline --abbrev-commit | tail -r -n 100 | cat -n
+stepTotal=`git log --pretty=oneline --abbrev-commit | wc -l`
+if [ -z "$1" ]; then 
+    step=1
+else 
+    step=$1
+fi
+
+let offset=stepTotal-step
+git checkout master~$offset --quiet
+git clean -f
+
+echo
+echo "Switched to $step"
+echo
