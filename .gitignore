@@ -1,7 +1,12 @@
 .DS_Store
 .idea/
 .ebextensions/
+.elasticbeanstalk/
 .vagrant/
 node_modules/
 npm-debug.log
 bower_components/
+config/local.json
+build/
+awsdeploy.zip
+*.heapsnapshot

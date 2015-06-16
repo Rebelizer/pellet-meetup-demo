@@ -1,0 +1,12 @@
+{
+  "name": "vevoDemo",
+  "version": "0.0.0",
+  "translations": "./assets/translations.json",
+  "component": "./frontend/index.js",
+  "styleMain": "./assets/vevo-demo.styl",
+  "excluded": false,
+  "assets": [],
+  "client-dependencies": [],
+  "server-dependencies": [],
+  "code": []
+}
