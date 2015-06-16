@@ -8,7 +8,7 @@
     "assets": "stylus",
     "templateType": "Jade",
     "translation": true,
-    "test": true,
+    "test": false,
     "abnFilter": "\\(active\\)"
   }
 }

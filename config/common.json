@@ -158,7 +158,8 @@
         {"test": "\\.static-styl$", "loader": "css?minimize!stylus" },
         {"test": "\\.static-css$", "loader": "css?minimize!autoprefixer" },
         {"test": "\\.static-less$", "loader": "css?minimize!autoprefixer!less" },
-        {"test": "\\.coffee$", "loader": "coffee" }
+        {"test": "\\.coffee$", "loader": "coffee" },
+        {"test": "\\.es6$", "loader": "babel" }
       ]
     }
     //"browser": {}
@@ -211,13 +212,29 @@
           "label": "alert",
           "timestamp": true
         }
+        /*
+        "mail": {
+          "to": "contact@vevo.com",
+          "from": "noreply@vevo.com",
+          "level": "silly",
+          "label": "alert",
+          "timestamp": true/*,
+          "host":"email-smtp.us-east-1.amazonaws.com",
+          "port":587,
+          "ssl":true,
+          "username":"XXXXXX",
+          "password":"YYYYYY"
+        }
+        */
       },
       "httplogger": {
-        "console": {
+        "file": {
           "level": "info",
-          "colorize": true,
+          "colorize": false,
           "label": "http",
-          "timestamp": true
+          "timestamp": true,
+          "filename": "/tmp/pellet-http.log",
+          "logstash": true
         }
       },
       "instrumentation": {
