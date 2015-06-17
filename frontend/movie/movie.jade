@@ -2,7 +2,7 @@
   .thumbnail
     img(src=this.state.imgUrl)
   .details
-    p.title=this.props.details.name
-    p my misc info...
+    p.title=this.props.details.title
+    p= this.props.details.genera.join(', ')
     p votes:
       span.vote  #{this.state.votes}

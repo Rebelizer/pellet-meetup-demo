@@ -31,7 +31,7 @@ module.exports = movieComponent = pellet.createClass({
 
   getInitialState: function() {
     // use the movie title to get a image
-    var str = this.props.details.name
+    var str = this.props.details.title
       , i = str.length
       , ix = 0;
 
@@ -43,6 +43,10 @@ module.exports = movieComponent = pellet.createClass({
       imgUrl: '/img/images-'+(ix % 5)+'.jpg',
       votes: 0
     };
+  },
+
+  componentWillReceiveProps: function(nextProps) {
+    this.setState(this.getInitialState());
   },
 
   click: function() {

@@ -3,7 +3,7 @@
     "name": "messageBoard",
     "version": "0.0.0",
     "component": "./frontend/message-board/message-board.js",
-    "styleMain": [
+    "style": [
       "./frontend/message-board/message-board.styl"
     ],
     "excluded": false,
@@ -39,5 +39,15 @@
     "client-dependencies": [],
     "server-dependencies": [],
     "code": []
+  },
+  {
+    "name": "RESTMiddleware",
+    "version": "0.0.0",
+    "server-dependencies": ["./src/middleware-RESTfulAPI.js"]
+  },
+  {
+    "name": "DAL",
+    "version": "0.0.0",
+    "code": ["./src/data-access-layer.js"]
   }
 ]

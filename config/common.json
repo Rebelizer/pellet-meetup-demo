@@ -5,6 +5,7 @@
   "application": {
     "config": {
       "layoutMode": "list",
+      "RESTFulAPIBaseUrl": "http://localhost:8080",
       // shared config for both client and server (do not include secrets this is public!)
       // "jsMountPoint": "/js/", is defaulted to server:webpackMountPoint if missing
       "intlHideDebugMsg": false,
@@ -27,6 +28,14 @@
       // "reactIgnoreRouteUnmount": true    // stop pellet from unmounting the page/layout on route changes
     },
     "options": {
+      "orientdb": {
+        "host": "localhost",
+        "port": 2424,
+        "username": "demo",
+        "password": "demo",
+        "transport": "binary",
+        "name": "MovieRatings"
+      },
       "locales": "en-US",
       "assetFileName": "assets.js",
       "componentFileName": "component.js",
@@ -35,7 +44,7 @@
       "includeUserAgentInfo": true,
       "cacheHashIgnoreArrayOrder": false,
       "cacheOnly200Response": true,
-      "reactCDNUrl": "//cdnjs.cloudflare.com/ajax/libs/react/0.12.0/react-with-addons.js",
+      "reactCDNUrl": "/js/react-with-addons.js",
       "useReactRenderToStaticMarkup": false,
       "skeletonPage": "#PELLET_PROJECT_PATH#/src/page-skeleton.ejs",
       "missingPage": "#PELLET_PROJECT_PATH#/src/page-404.ejs",
@@ -162,9 +171,15 @@
         {"test": "\\.coffee$", "loader": "coffee" },
         {"test": "\\.es6$", "loader": "babel" }
       ]
-    }
+    },
+
     //"browser": {}
-    //"server": {}
+    "server": {
+      "externals": [{
+        "connect-rest":"connect-rest",
+        "oriento": "oriento"
+      }]
+    }
   },
 
   // config statsd client

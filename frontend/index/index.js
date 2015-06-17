@@ -2,6 +2,27 @@ var React = require("react")
   , indexJade = require('./index.jade')
   , pellet = require("pellet");
 
+function getData(_this, page, next) {
+  var api = _this.coordinator('DAL', 'DAL', next?'serialize':void 0);
+
+  if(page < 0) {
+    page = 0;
+  }
+
+  var limit = 5;
+  var offset = limit * page;
+  api.select('SELECT title, out(hasGenera).description as genera FROM Movies OFFSET=:offset', {offset:offset}, limit, function(err, movies) {
+    if(err) {
+      return next(err);
+    }
+
+    _this.setState({movies:movies, limit:limit, offset:offset, page:page});
+    if(next) {
+      next();
+    }
+  });
+}
+
 module.exports = indexPage = pellet.createClass({
   /*
   getInitialState: function() {
@@ -26,7 +47,7 @@ module.exports = indexPage = pellet.createClass({
 // layoutTemplate: "{name_of_your_layout_in_the_manifest}",
   
   routes: ["/", "/index", "/movie/:id"],
-  
+
   componentConstruction: function(options, next) {
     this.setCanonical('http://pellet.io/demo');
     this.addToHead('meta', {name: 'description', content:'movie database demo'});
@@ -40,24 +61,15 @@ module.exports = indexPage = pellet.createClass({
     }
     */
 
-    // on the server load the file "staticMovies.json"
-    // and serialize it for the client.
-    if(process.env.SERVER_ENV) {
-      var fs = require('fs');
+    getData(this, 0, next);
+  },
 
-      // get path from pellet options (skeletonPage is the full path to project page-skeleton.ejs so we can use it to find staticMovies.json
-      var data = fs.readFileSync(pellet.options.skeletonPage.replace('src/page-skeleton.ejs', 'staticMovies.json')).toString();
-      data = JSON.parse(data);
-      this.set({movies:data});
-    }
+  prev: function() {
+    getData(this, this.state.page-1);
+  },
 
-    // because the server called this.set({}) -> we have
-    // the serialize data on our props
-    this.setState({movies:this.props.movies});
-
-    // now create a message board child component so it can
-    // serialize its data to the page.
-    this.addChildComponent("msg1", pellet.components.messageBoard, {file:'message-board.txt'}, next);
+  next: function() {
+    getData(this, this.state.page+1);
   },
 
   render: function() {
