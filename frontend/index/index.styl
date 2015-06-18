@@ -1,0 +1,195 @@
+header
+  navigation(size:30px, linkColor:vevo-dark-gray)
+  margin-bottom 10px
+
+.select-movie {
+  bubble top center #57777E
+}
+
+body
+  background-color: vevo-dark-gray
+
+// styl
+.vevo-web-layout {
+  background-color: vevo-bg-color
+  padding-top: header-height
+
+  header {
+    top: 0
+    position: fixed
+    width: 100%
+    height: header-height
+    z-index: header-teir
+    background-color: vevo-header-color
+    border-bottom: solid 1px vevo-bg-color
+
+    no-select()
+
+    .down-arrow {
+      image: "~index/img/down-arrow.png" 25px 14px
+      background-repeat: no-repeat
+      margin-left: 100px
+      margin-top: 5px
+      width: 25px
+      height: 14px
+      display: block
+    }
+
+    .search-icon {
+      color: #000000
+      font-size: 36px
+      padding-top: 7px
+      padding-right: 5px
+      display: block
+      float: right
+    }
+
+    .vevo-logo {
+      col(3/12)
+      height: 22px
+      margin-top: 15px
+      float: left;
+      background: url("~index/img/vevo-header.svg") no-repeat
+      display: inline-block
+    }
+
+    .nav-menu {
+      col(8/12)
+      height: header-height
+      text-align: center;
+    }
+
+    inline-list()
+
+    ul {
+      padding: 0
+      margin: 0
+      display: inline-block
+
+      .browse, .tv, .search {
+        margin-right: 50px
+      }
+
+      .shows, .browse, .tv, .search {
+        text-transform: uppercase
+        font-size: 16px
+        line-height: 47px
+        letter-spacing: 0.1em
+        font-weight: 700
+      }
+
+      .search-icon-vevo {
+        width: 15px
+        font-size: 14px
+        line-height: 14px
+      }
+    }
+
+    .login-status {
+      col(2/12)
+
+      .message {
+        float:right
+        list-style: 14px
+        line-height: 27px
+        font-size: 14px
+        font-weight: 500
+      }
+
+      .status {
+        float:right
+        margin: 20px 5px 0 8px
+
+        width: 10px
+        height: 10px
+        border-radius: 30px
+        right: 15px
+        background-color: logout-color
+      }
+      .status.logout {
+        background-color: logout-color
+      }
+      .status.signin {
+        background-color: signin-color
+      }
+    }
+
+
+  }
+
+  footer {
+    height: 290px;
+    padding-top: 45px
+    background-color: vevo-dark-gray
+    font-weight: 600
+    font-size: 15px
+    color: #FFF
+
+    no-select()
+
+    .company-col, .share-col, .legal-col {
+      col(1/4, gutter: 3.1)
+      padding:0
+
+      a {
+        cursor: pointer
+        color: #FFF
+        text-decoration: none
+        transition: color 0.1s ease-in-out
+        &:hover {
+          color: vevo-light-blue
+        }
+      }
+
+      li {
+        list-style: none
+        list-style-image: none
+        list-style-position: outside
+        list-style-type: none
+        line-height: 21px
+        padding: 0
+      }
+    }
+
+    .copyright {
+      padding-top: 50px;
+      col(1/1)
+    }
+  }
+
+  .sub-nav {
+    height: 70px
+    line-height: 70px;
+
+    background #FFF
+  }
+
+  +at('xs') {
+    header ul, .login-status {
+      display: none
+    }
+  }
+
+  +above('sm') {
+    header .down-arrow {
+      display:none
+    }
+    header .search-icon {
+      display:none
+    }
+  }
+}
+
+.index-page {
+  ul {
+    reset-list()
+  }
+}
+
+.content
+  +at('xs')
+    center(max-width:100%)
+    padding: 0 10px
+  +above('sm')
+    center(max-width:768px)
+    padding: 0 10px

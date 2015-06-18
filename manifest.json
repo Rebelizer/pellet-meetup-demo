@@ -1,12 +1,29 @@
-{
-  "name": "vevoDemo",
-  "version": "0.0.0",
-  "translations": "./assets/translations.json",
-  "component": "./frontend/index.js",
-  "styleMain": "./assets/vevo-demo.styl",
-  "excluded": false,
-  "assets": [],
-  "client-dependencies": [],
-  "server-dependencies": [],
-  "code": []
-}
+[
+  {
+    "name": "movie",
+    "version": "0.0.0",
+    "component": "./frontend/movie/movie.js",
+    "style": [
+      "./frontend/movie/movie.styl"
+    ],
+    "excluded": false,
+    "assets": [],
+    "client-dependencies": [],
+    "server-dependencies": [],
+    "code": [],
+    "translations": "./frontend/movie/translations.json"
+  },
+  {
+    "name": "vevoDemo",
+    "version": "0.0.0",
+    "translations": "./assets/translations.json",
+    "component": "./frontend/index/index.js",
+    "styleMain": "./assets/vevo-demo.styl",
+    "style": "./frontend/index/index.styl",
+    "excluded": false,
+    "assets": [],
+    "client-dependencies": [],
+    "server-dependencies": [],
+    "code": []
+  }
+]

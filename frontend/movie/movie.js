@@ -1,8 +1,8 @@
 var React = require("react")
-  , indexJade = require('./index.jade')
+  , movieJade = require('./movie.jade')
   , pellet = require("pellet");
 
-module.exports = indexPage = pellet.createClass({
+module.exports = movieComponent = pellet.createClass({
   /*
   componentConstruction: function(options, next) {
     this.set({val:'val'}); // serialized to the broswer from the server render
@@ -29,12 +29,27 @@ module.exports = indexPage = pellet.createClass({
   },
   */
 
-// layoutTemplate: "{name_of_your_layout_in_the_manifest}",
-  
-  routes: ["/", "/index"],
-  
+  getInitialState: function() {
+    // use the movie title to get a image
+    var str = this.props.details.name
+      , i = str.length
+      , ix = 0;
+
+    while(i) {
+      ix += str.charCodeAt(--i);
+    }
+
+    return {
+      imgUrl: '/img/images-'+(ix % 5)+'.jpg',
+      votes: 0
+    };
+  },
+
+  click: function() {
+    this.setState({votes:this.state.votes + 1});
+  },
 
   render: function() {
-    return indexJade(this);
+    return movieJade(this);
   }
 });

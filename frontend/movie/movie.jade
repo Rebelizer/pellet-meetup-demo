@@ -1,0 +1,8 @@
+.movie-component(onClick=this.click, class="noselect")
+  .thumbnail
+    img(src=this.state.imgUrl)
+  .details
+    p.title=this.props.details.name
+    p my misc info...
+    p votes:
+      span.vote  #{this.state.votes}

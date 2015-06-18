@@ -1,0 +1,35 @@
+// styl
+.movie-component {
+  display inline-block
+  width 100%
+  margin-bottom 5px
+  cursor pointer
+
+  opacity 1
+
+  .thumbnail {
+    img {
+      height: 120px
+      float: left
+      margin-right: 10px
+    }
+  }
+  .details {
+    float: left
+    p {
+      line-height 1em
+      margin 0
+    }
+    .title {
+      font-weight bolder
+    }
+    span.vote {
+      color: vevo-pink
+    }
+  }
+}
+
+// Page is loadding also check out body.uninitialized .movie-component
+body.uninitialized .movie-component {
+  opacity .5
+}

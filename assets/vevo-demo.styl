@@ -6,21 +6,33 @@
 // Load NIB
 @import 'nib'
 
-// Load reset file
-@import 'reset.styl'
-
-/* You can install other frameworks, so no need to have
- * a reset file :)
- */
-
 // Load Jeet (https://github.com/mojotech/jeet/tree/master/stylus/jeet)
-// @import 'vender/jeet/_functions'
-// @import 'vender/jeet/_grid'
+@import 'vender/jeet/_functions'
+@import 'vender/jeet/_grid'
+
+jeet = {
+  gutter: 0,
+  parent-first: false,
+  layout-direction: LTR,
+  max-width: 950px
+}
 
 // Load Rupture (https://github.com/jenius/rupture/tree/master/rupture)
-// @import 'vender/rupture/rupture'
+@import 'vender/rupture/rupture'
+
+rupture.anti-overlap = true // enables 1px (or em equivalent) overlap correction
+rupture.mobile-cutoff = 768px  // inclusive of mobile, lower bound of tablet
+rupture.desktop-cutoff = 992px // inclusive of desktop, upper bound of tablet
+rupture.hd-cutoff = 1400px // Pixel value where the hd mixin kicks in, meaning a wider desktop-screen.
+rupture.scale =        0        400px       768px      992px        1400px
+//                     └────┬────┘ └────┬────┘ └────┬────┘ └────┬────┘ └────┬────
+// Slice numbers:           1           2           3           4           5
+// rupture.scale-names:    'xs'        'sm'        'md'        'lg'        'xl'
+rupture.scale-names = 'xs' 'sm' 'md' 'lg' 'xl'
+rupture.base-font-size = 12px
 
 // Load AXIS (https://github.com/jenius/axis/tree/master/axis)
+@import 'vender/axis/index'
 // @import 'vender/axis/reset'
 // @import 'vender/axis/vendor'
 // @import 'vender/axis/utilities'
@@ -40,14 +52,39 @@
 
 // Init framework stuff like (Jeet, AXIS, etc) Read their docs
 // global-reset()
-// framework()
+framework()
+normalize-css()
 // base()
 // bold-italic()
 // headers()
 // lists()
 // text-selection()
 
-// Pellet and React are fully running
-body.uninitialized {
-  //visibility hidden
+body {
+  background-color beige
+  .uninitialized {
+    //visibility hidden
+  }
 }
+
+.noselect {
+  -webkit-touch-callout: none
+  -webkit-user-select: none
+  -khtml-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+}
+
+// z-index teirs
+header-teir = 1000
+
+vevo-pink = #f90094
+vevo-light-blue = #03cfeb
+vevo-bg-color = #eee
+vevo-dark-gray = #8f8c91
+logout-color = #ff3912
+signin-color = #45f9a5
+
+header-height = 50px
+vevo-header-color ?= #FFF
