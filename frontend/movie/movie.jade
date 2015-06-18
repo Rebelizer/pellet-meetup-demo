@@ -4,5 +4,7 @@
   .details
     p.title=this.props.details.title
     p= this.props.details.genera.join(', ')
-    p genera votes:
-      span.vote  #{this.state.votes}
+    p
+      pellet_intl(index='genera', count=this.state.votes)
+    p
+      pellet_intl(index='ratings', RATINGS=this.props.details.ratings, GENDER=this.props.details.gender)

@@ -1,10 +1,11 @@
 {
-  "myMessageFormat": {
-    "en-US":"{GENDER, select, male {He} female {She} other {They}} found {NUM_RESULTS, plural, one {1 result} other {# results}} in {NUM_CATEGORIES, plural, one {1 category} other {# categories}}."
+  "ratings": {
+    "en-US":"{RATINGS, plural, one {1 rating} other {# ratings}} with first {GENDER, select, M {Boy} F {Girl} other {They}} leaving a mark",
+    "fr-FR":"{RATINGS, plural, one {1 avis} other {# votes}} avec la première {GENDER, select, M {garçon} F {fille} other {They}} laissant une marque"
   },
-  "myKey": {
-    "en-US": "The us value for myKey",
-    "fr": "La valeur nous pour myKey",
-    "ja": "MYKEY米国の価値"
+  "genera": {
+    "ja": "属の票：{count}",
+    "en-US": "genera votes: {count}",
+    "fr-FR": "le nombre de genres : {count}"
   }
 }

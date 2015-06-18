@@ -12,8 +12,8 @@ function getData(_this, page, search, next) {
   var limit = 5;
   var offset = limit * page;
   var sql = search ?
-      'SELECT title, out(hasGenera).description as genera FROM Movies WHERE title LIKE :search OFFSET :offset' :
-      'SELECT title, out(hasGenera).description as genera FROM Movies WHERE OFFSET :offset';
+      'SELECT title, out(hasGenera).description as genera, first(in(rated)).gender as gender, in(ratings).size() as ratings FROM Movies WHERE title LIKE :search OFFSET :offset' :
+      'SELECT title, out(hasGenera).description as genera, first(in(rated)).gender as gender, in(ratings).size() as ratings FROM Movies WHERE OFFSET :offset';
 
   api.select(sql, {offset:offset, search: '%' + search + '%'}, limit, function(err, movies) {
     if(err) {
@@ -91,7 +91,38 @@ module.exports = indexPage = pellet.createClass({
     getData(this, this.state.page+1, null);
   },
 
+  setLanguage: function(locale) {
+    var _this = this;
+
+    pellet.intl.load(locale, function() {
+      _this.setProps({locales: locale});
+      pellet.cookie.set('language', locale);
+      document.body.setAttribute('locales', locale);
+    });
+  },
+
+  en: function() {
+    this.setLanguage('en-US');
+  },
+
+  fr: function() {
+    this.setLanguage('fr-FR');
+  },
+
+  ja:function() {
+    this.setLanguage('ja');
+  },
+
   render: function() {
     return indexJade(this);
   }
+});
+
+
+pellet.setLocaleLookupFn(function(renderOptions, component, options) {
+  var loc = renderOptions.http.cookie('language') ||
+            renderOptions.http.headers('x-vevo-culture') ||
+            pellet.options.locales || 'en-US';
+  loc = loc.split('-');
+  return loc[0].toLowerCase() + '-' + (loc[1] || loc[0]).toUpperCase();
 });
