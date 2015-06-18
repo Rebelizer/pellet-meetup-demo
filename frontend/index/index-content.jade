@@ -1,4 +1,6 @@
 .index-page.content
+  - var term = (this.props.query && this.props.query.search || 'Search for a movie')
+  input.search(ref="search", type="text", placeholder=term)
   h1 Movie Database
   ul(class=pellet.config.layoutMode)
     each movie in this.state.movies

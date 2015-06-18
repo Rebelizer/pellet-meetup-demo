@@ -45,12 +45,31 @@ module.exports = movieComponent = pellet.createClass({
     };
   },
 
+  componentDidMount: function(nextProps) {
+    var _this = this;
+
+    this.event('vote').on(function(genera) {
+      var i, hits = 0;
+
+      for(i in genera) {
+        if(~_this.props.details.genera.indexOf(genera[i])) {
+          hits++;
+        }
+      }
+
+      if(hits) {
+        _this.setState({votes:_this.state.votes + hits});
+      }
+    });
+  },
+
   componentWillReceiveProps: function(nextProps) {
     this.setState(this.getInitialState());
   },
 
   click: function() {
-    this.setState({votes:this.state.votes + 1});
+    this.event('vote').emit(this.props.details.genera);
+    //this.setState({votes:this.state.votes + 1});
   },
 
   render: function() {

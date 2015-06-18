@@ -2,7 +2,7 @@ var React = require("react")
   , indexJade = require('./index.jade')
   , pellet = require("pellet");
 
-function getData(_this, page, next) {
+function getData(_this, page, search, next) {
   var api = _this.coordinator('DAL', 'DAL', next?'serialize':void 0);
 
   if(page < 0) {
@@ -11,7 +11,11 @@ function getData(_this, page, next) {
 
   var limit = 5;
   var offset = limit * page;
-  api.select('SELECT title, out(hasGenera).description as genera FROM Movies OFFSET=:offset', {offset:offset}, limit, function(err, movies) {
+  var sql = search ?
+      'SELECT title, out(hasGenera).description as genera FROM Movies WHERE title LIKE :search OFFSET :offset' :
+      'SELECT title, out(hasGenera).description as genera FROM Movies WHERE OFFSET :offset';
+
+  api.select(sql, {offset:offset, search: '%' + search + '%'}, limit, function(err, movies) {
     if(err) {
       return next(err);
     }
@@ -61,15 +65,30 @@ module.exports = indexPage = pellet.createClass({
     }
     */
 
-    getData(this, 0, next);
+    getData(this, 0, this.props.query && this.props.query.search, next);
+  },
+
+  componentDidMount: function(nextProps) {
+    var _this = this;
+    var el = this.refs['search'].getDOMNode();
+    pellet.observables.fromEvent(el, "keyup")
+      .debounce(300)
+      .onValue(function(evt) {
+        if(evt.key === 13 || evt.keyCode === 13 || evt.which === 13) {
+          el.blur();
+        }
+
+        window.history.replaceState(null, null, '/?search=' + encodeURIComponent(el.value));
+        getData(_this, 0, (el.value.trim().length > 1) ? el.value : null);
+      });
   },
 
   prev: function() {
-    getData(this, this.state.page-1);
+    getData(this, this.state.page-1, null);
   },
 
   next: function() {
-    getData(this, this.state.page+1);
+    getData(this, this.state.page+1, null);
   },
 
   render: function() {
