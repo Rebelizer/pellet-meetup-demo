@@ -15,8 +15,19 @@ function getData(_this, page, search, next) {
       'SELECT title, out(hasGenera).description as genera, first(in(rated)).gender as gender, in(ratings).size() as ratings FROM Movies WHERE title LIKE :search OFFSET :offset' :
       'SELECT title, out(hasGenera).description as genera, first(in(rated)).gender as gender, in(ratings).size() as ratings FROM Movies WHERE OFFSET :offset';
 
+  var instrument = pellet.instrumentation.namespace(process.env.SERVER_ENV?'server.movieDBDemo.':'client.movieDBDemo.');
+
+  pellet.instrumentation.log({type:'search', term:search});
+
+  instrument.increment("search");
+  var measure = instrument.elapseTimer(false, "select.");
+
+  measure.mark("start");
+
   api.select(sql, {offset:offset, search: '%' + search + '%'}, limit, function(err, movies) {
+    measure.mark("done");
     if(err) {
+      instrument.increment("select.error");
       return next(err);
     }
 
