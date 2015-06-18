@@ -4,6 +4,7 @@
   // your application config
   "application": {
     "config": {
+      "layoutMode": "list",
       // shared config for both client and server (do not include secrets this is public!)
       // "jsMountPoint": "/js/", is defaulted to server:webpackMountPoint if missing
       "intlHideDebugMsg": false,

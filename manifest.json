@@ -1,5 +1,19 @@
 [
   {
+    "name": "messageBoard",
+    "version": "0.0.0",
+    "component": "./frontend/message-board/message-board.js",
+    "styleMain": [
+      "./frontend/message-board/message-board.styl"
+    ],
+    "excluded": false,
+    "assets": [],
+    "client-dependencies": [],
+    "server-dependencies": [],
+    "code": [],
+    "translations": "./frontend/message-board/translations.json"
+  },
+  {
     "name": "movie",
     "version": "0.0.0",
     "component": "./frontend/movie/movie.js",

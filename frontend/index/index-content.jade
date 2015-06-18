@@ -1,6 +1,9 @@
 .index-page.content
+  //messageBoard(text=this.props.msg1.text)
+  // or
+  =pellet.components.messageBoard(this.props.msg1)
   h1 Movie Database
-  ul
+  ul(class=pellet.config.layoutMode)
     each movie in this.state.movies
       li
         movie(details=movie)

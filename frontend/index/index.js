@@ -40,15 +40,24 @@ module.exports = indexPage = pellet.createClass({
     }
     */
 
-    // set our own props
-    this.setProps({mode:'list'});
+    // on the server load the file "staticMovies.json"
+    // and serialize it for the client.
+    if(process.env.SERVER_ENV) {
+      var fs = require('fs');
 
-    // start with hardcoded movie values
-    this.setState({
-      movies:[{name:"a"},{name:"b"},{name:"c"},{name:"d"},{name:"e"},{name:"f"},{name:"a"}]
-    });
+      // get path from pellet options (skeletonPage is the full path to project page-skeleton.ejs so we can use it to find staticMovies.json
+      var data = fs.readFileSync(pellet.options.skeletonPage.replace('src/page-skeleton.ejs', 'staticMovies.json')).toString();
+      data = JSON.parse(data);
+      this.set({movies:data});
+    }
 
-    next();
+    // because the server called this.set({}) -> we have
+    // the serialize data on our props
+    this.setState({movies:this.props.movies});
+
+    // now create a message board child component so it can
+    // serialize its data to the page.
+    this.addChildComponent("msg1", pellet.components.messageBoard, {file:'message-board.txt'}, next);
   },
 
   render: function() {
