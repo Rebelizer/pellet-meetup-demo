@@ -1,7 +1,17 @@
 .index-page.content
   - var term = (this.props.query && this.props.query.search || 'Search for a movie')
+  - usecomp = pellet.experiment.select('@ab')
   input.search(ref="search", type="text", placeholder=term)
   h1 Movie Database
+  .left
+    p Current version
+    ab
+  .right
+    p Experiment version
+    usecomp
+  if(pellet.experiment.select('flag') === 'A')
+    pre.flags We have a flag=A
+  a.dashboard(href='/ab') Got to dashboard
   ul(class=pellet.config.layoutMode)
     each movie in this.state.movies
       li

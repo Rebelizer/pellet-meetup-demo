@@ -10,3 +10,6 @@ config/local.json
 build/
 awsdeploy.zip
 *.heapsnapshot
+.ga-experiments
+.ga.pem
+
